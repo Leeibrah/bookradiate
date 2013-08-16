@@ -1,0 +1,24 @@
+
+<?php /*  Web site Title  */ ?>
+<?php $__env->startSection('title'); ?>
+@parent
+:: Template
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('assets'); ?>
+<!-- add your css and js here, dont add the jquery library again -->
+
+ <!-- <link rel="stylesheet" href="<?php echo asset('assets/styles/css/template.css'); ?> "> -->
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+<!-- replace the content below to suit your page content -->
+<h4>Coming Soon... Check out Later.</h4>
+
+<?php $__env->stopSection(); ?>
+
+
+
+
+<?php echo $__env->make('layouts.bookcheetah', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

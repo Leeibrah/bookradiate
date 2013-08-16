@@ -1,0 +1,71 @@
+
+<?php /*  Web site Title  */ ?>
+<?php $__env->startSection('title'); ?>
+@parent
+:: Courses
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('content'); ?>
+
+<h1>Create Course</h1>
+
+<?php echo Form::open(array('route' => 'courses.store')); ?>
+    <ul>
+        <li>
+            <?php echo Form::label('professor', 'Professor:'); ?>
+            <?php echo Form::text('professor'); ?>
+        </li>
+
+        <li>
+            <?php echo Form::label('number', 'Course Number:'); ?>
+            <?php echo Form::text('number'); ?>
+        </li>
+
+        <li>
+            <?php echo Form::label('name', 'Course Name:'); ?>
+            <?php echo Form::text('name'); ?>
+        </li>
+
+        <li>
+            <?php echo Form::label('description', 'Description:'); ?>
+            <?php echo Form::textarea('description'); ?>
+        </li>
+
+        <li>
+            <?php echo Form::label('semester', 'Semester:'); ?>
+            <?php echo Form::select('semester', array(
+                    'Spring' => 'Spring',
+                    'Fall' => 'Fall'
+                ), 'Spring', array('class'=>'btn btn-primary btn-small', 'id'=>'semester')); ?>
+        </li></br/></br/>
+
+        <li>
+            <?php echo Form::label('books', 'Book List:'); ?>
+            <?php echo Form::textarea('books'); ?>
+        </li>
+
+        <li>
+            <?php echo Form::submit('Submit', array('class' => 'btn')); ?>
+        </li>
+    </ul>
+<?php echo Form::close(); ?>
+
+<?php if ($errors->any()): ?>
+    <ul>
+        <?php echo implode('', $errors->all('<li class="error">:message</li>')); ?>
+    </ul>
+<?php endif; ?>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('assets'); ?>
+<!-- add your css and js here, dont add the jquery library again -->
+
+ <link rel="stylesheet" href="<?php echo asset('assets/styles/css/courses-create.css'); ?> ">
+ 
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('layouts.bookcheetah', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

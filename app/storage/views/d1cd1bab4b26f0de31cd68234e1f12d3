@@ -1,0 +1,84 @@
+
+<?php $__env->startSection('content'); ?>
+
+<h1>Add a Book to your Bookshelf</h1>
+<p><?php echo $topmessage; ?></p>
+<?php echo Form::open(array('route' => 'bookshelf.store')); ?>
+    <ul>
+        <li>
+            <?php echo Form::label('name', 'Name:'); ?>
+            <?php echo Form::text('name'); ?>
+        </li>
+
+        <li>
+            <?php echo Form::label('author', 'Author:'); ?>
+            <?php echo Form::text('author'); ?>
+        </li>
+
+        <li>
+            <?php echo Form::label('price', 'Price:'); ?>
+            <?php echo Form::text('price'); ?>
+        </li>
+        <li class="radio status">
+            <?php echo Form::label('status', 'Status:'); ?>
+            <ul>
+                <li>
+                    <?php echo Form::radio('status', 'Available', true, array('id' => 'status-available')); ?>
+                    <?php echo Form::label('status-available', 'Available'); ?>
+                </li>
+                <li>
+                    <?php echo Form::radio('status', 'Sold', false, array('id' => 'status-sold')); ?>
+                    <?php echo Form::label('status-sold', 'Sold'); ?>
+                </li>
+                <li>
+                    <?php echo Form::radio('status', 'Unavailable', false, array('id' => 'status-unavailable')); ?>
+                    <?php echo Form::label('status-unavailable', 'Unavailable'); ?>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <?php echo Form::label('dateavailable', 'Date Available'); ?>
+            <?php echo Form::text('available', null, array('id' => 'date-available')); ?>
+        </li>
+        <li class="radio condition">
+            <?php echo Form::label('condition', 'Condition'); ?>
+            <ul>
+                <li>
+                    <?php echo Form::radio('condition', 'Like New - Shiny cover, crisp corners, no back creases', true, array('id' => 'condition-like-new')); ?>
+                    <?php echo Form::label('condition-like-new', 'Like New - Shiny cover, crisp corners, no back creases'); ?>
+                </li>
+                <li>
+                    <?php echo Form::radio('condition', 'Light Use - a few dog-eared corners, no marks or tears', false, array('id' => 'condition-light-use')); ?>
+                    <?php echo Form::label('condition-light-use', 'Light Use - a few dog-eared corners, no marks or tears'); ?>
+                </li>
+                <li>
+                    <?php echo Form::radio('condition', 'Normal Use - dog-eared, some highlights and notes in the margins', false, array('id' => 'condition-normal-use')); ?>
+                    <?php echo Form::label('condition-normal-use', 'Normal Use - dog-eared, some highlights and notes in the margins'); ?>
+                </li>
+                <li>
+                    <?php echo Form::radio('condition', 'Heavy Use - has that vintage, lived-in look', false, array('id' => 'condition-heavy-use')); ?>
+                    <?php echo Form::label('condition-heavy-use', 'Heavy Use - has that vintage, lived-in look'); ?>
+                </li>
+                <li>
+                    <?php echo Form::radio('condition', 'Rough - it\'s all there \& usable, but that\'s about it', false, array('id' => 'condition-rough')); ?>
+                    <?php echo Form::label('condition-rough', 'Rough - it\'s all there \& usable, but that\'s about it'); ?>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <?php echo Form::submit('Save', array('class' => 'btn btn-info')); ?>
+        </li>
+    </ul>
+<?php echo Form::close(); ?>
+
+<?php if ($errors->any()): ?>
+    <ul>
+        <?php echo implode('', $errors->all('<li class="error">:message</li>')); ?>
+    </ul>
+<?php endif; ?>
+
+<?php $__env->stopSection(); ?>
+
+
+
+<?php echo $__env->make('layouts.bookcheetah', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

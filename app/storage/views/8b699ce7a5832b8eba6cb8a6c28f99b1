@@ -1,0 +1,67 @@
+
+<?php $__env->startSection('css'); ?>
+<link rel="stylesheet" href="<?php echo asset('assets/styles/css/mybooks.css'); ?> ">
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+
+
+<div class="a-content clearfix">
+
+    <h2 class="gradient-title"><?php echo $title; ?></h2>
+
+
+    <fieldset>
+        <legend>
+            <h3 class="gradient-yellow"><?php echo $topmessage; ?></h3>
+        </legend>
+        <?php if (isset($wishlist['0'])): ?>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Book</th>
+                    <th>Author</th>
+                    <th class="binding">Binding</th>
+                    <th>Price</th>
+                    <th>Potential Local Sellers</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php foreach ($wishlist as $wishlist): ?>
+                    <tr>
+                        <td>
+                            <a href="<?php echo URL::to('wishlist/'.$wishlist->id); ?>"><img src="<?php echo e($wishlist->imgurl); ?>" /></a>
+                        </td>
+                        <td><?php echo e($wishlist->author); ?></td>
+                        <td><?php echo e($wishlist->binding); ?></td>
+                        <td><?php echo e($wishlist->price); ?></td>
+                        <td>0</td>
+                        
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                         <a href="<?php echo URL::to('wishlist/'.$wishlist->id); ?>"><?php echo e($wishlist->name); ?></a>
+                        </td>
+                        <td>
+                            <a href="<?php echo $wishlist->bookurl; ?>" class="btn btn-warning">On Amazon</a>
+                        </td>
+                        <td>
+                            <?php echo User::editButton($wishlist->userid, 'wishlist', $wishlist->id); ?>
+                        </td>
+                        <td>
+                            <?php echo User::deleteButton($wishlist->userid, 'wishlist', $wishlist->id); ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php else: ?>
+            There are no Wishlist Items
+        <?php endif; ?>
+
+    </fieldset>
+</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.bookcheetah', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

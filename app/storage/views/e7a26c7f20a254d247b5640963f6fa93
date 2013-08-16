@@ -1,0 +1,35 @@
+
+<?php $__env->startSection('main'); ?>
+
+<h1>Edit Courselist</h1>
+<?php echo Form::model($courselist, array('method' => 'PATCH', 'route' => array('courselists.update', $courselist->id))); ?>
+    <ul>
+            <?php echo Form::input('number', 'userid'); ?>
+            <?php echo Form::input('number', 'courseid'); ?>
+
+
+        <li>
+            <?php echo Form::label('username', 'Username:'); ?>
+            <?php echo Form::text('username'); ?>
+        </li>
+
+        <li>
+            <?php echo Form::label('coursename', 'Coursename:'); ?>
+            <?php echo Form::text('coursename'); ?>
+        </li>
+
+        <li>
+            <?php echo Form::submit('Update', array('class' => 'btn btn-info')); ?>
+            <?php echo link_to_route('courselists.show', 'Cancel', $courselist->id, array('class' => 'btn')); ?>
+        </li>
+    </ul>
+<?php echo Form::close(); ?>
+
+<?php if ($errors->any()): ?>
+    <ul>
+        <?php echo implode('', $errors->all('<li class="error">:message</li>')); ?>
+    </ul>
+<?php endif; ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.scaffold', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

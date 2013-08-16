@@ -1,0 +1,25 @@
+
+<?php /*  Web site Title  */ ?>
+<?php $__env->startSection('title'); ?>
+@parent
+:: Error
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('css'); ?>
+	<link rel="stylesheet" href="<?php echo asset('assets/styles/css/errorpage.css'); ?> ">
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+	
+	<section class="not-found">
+		<div class="error_container">
+	        <h1>404 NOT FOUND</h1>
+	        <span class="sad">:(</span>
+	        <p>Sorry this page can not be found.</p>
+	        <p>Please check if you typed your link correctly.</p>
+	    </div>
+	</section>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.bookcheetah', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

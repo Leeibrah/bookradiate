@@ -1,0 +1,161 @@
+
+<?php /*  Web site Title  */ ?>
+<?php $__env->startSection('title'); ?>
+@parent
+:: Home
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('css'); ?>
+
+<link rel="stylesheet" href="<?php echo asset('assets/styles/css/colleges.css'); ?> ">
+
+<?php $__env->stopSection(); ?>
+
+
+
+<?php $__env->startSection('content'); ?>
+
+<h2><?php echo e($college->name); ?></h2>
+
+
+
+<p><?php echo link_to_route('colleges.index', 'Go to all colleges'); ?></p>
+
+	<div id="doublescroll">
+		<table class="table table-striped table-bordered">
+		    <thead>
+		        <tr>
+		            <th>Name</th>
+					<th>Street</th>
+					<th>City</th>
+					<th>State</th>
+					<th>Postal_code</th>
+					<th>Student_count</th>
+                    <?php if(User::adminCheck(Auth::user()->id)): ?>
+    					<th>Added_by</th>
+    					<th>Approved_by</th>
+    					<th>Approved_at</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th> 
+                    <?php endif; ?>
+					
+		        </tr>
+		    </thead>
+
+		    <tbody>
+		        <tr>
+		            <td><?php echo e($college->name); ?></td>
+					<td><?php echo e($college->street); ?></td>
+					<td><?php echo e($college->city); ?></td>
+					<td><?php echo e($college->state); ?></td>
+					<td><?php echo e($college->postal_code); ?></td>
+					<td><?php echo e($college->student_count); ?></td>
+                    <?php if(User::adminCheck(Auth::user()->id)): ?>
+                        <td><?php echo e($college->added_by); ?></td>
+    					<td><?php echo e($college->approved_by); ?></td>
+    					<td><?php echo e($college-> approved_at); ?></td>
+    					<td><?php echo e($college->latitude); ?></td>
+    					<td><?php echo e($college->longitude); ?></td>
+            <td><?php echo link_to_route('colleges.edit', 'Edit', array($college->id), array('class' => 'btn btn-info')); ?></td>
+            <td>
+                <?php echo Form::open(array('method' => 'DELETE', 'route' => array('colleges.destroy', $college->id))); ?>
+                    <?php echo Form::submit('Delete', array('class' => 'btn btn-danger')); ?>
+                <?php echo Form::close(); ?>
+            </td>
+                    <?php endif; ?>
+		        </tr>
+		    </tbody>
+		</table>
+	</div>
+
+
+<h4>Bookshelves</h4>
+<?php if(isset($bookshelf['0'])): ?>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>User Name</th>
+				<th>Book Name</th>
+				<th>Author</th>
+				<th>Price</th>
+				<th>Status</th>
+				<th>Available</th>
+				<th>Condition</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php foreach ($bookshelf as $bookshelf): ?>
+                <?php
+                $user = User::find($bookshelf->userid);
+                ?>
+                <tr>
+                    <td><?php echo $user->fullNameLink(); ?></td>
+            		<td><a href="<?php echo URL::to('bookshelf/'.$bookshelf->id); ?>"><?php echo e($bookshelf->name); ?></a></td>
+					<td><?php echo e($bookshelf->author); ?></td>
+					<td><?php echo e($bookshelf->price); ?></td>
+					<td><?php echo e($bookshelf->status); ?></td>
+					<td><?php echo e($bookshelf->available); ?></td>
+					<td><?php echo e($bookshelf->condition); ?></td>
+
+					<?php if(User::adminCheck(Auth::user()->id)): ?>
+                    <td><?php echo link_to_route('bookshelf.edit', 'Edit', array($bookshelf->id), array('class' => 'btn btn-info')); ?></td>
+                    
+                    <td>
+                        <?php echo Form::open(array('method' => 'DELETE', 'route' => array('bookshelf.destroy', $bookshelf->id))); ?>
+                            <?php echo Form::submit('Delete', array('class' => 'btn btn-danger')); ?>
+                        <?php echo Form::close(); ?>
+                    </td>
+                    <?php endif; ?>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php else: ?>
+    No Books found
+<?php endif; ?>
+
+<h4>Wishlists</h4>
+<?php if(isset($wishlist['0'])): ?>
+	
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>User Name</th>
+				<th>Book Name</th>
+				<th>Author</th>
+				<th>Price</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php foreach ($wishlist as $wishlist): ?>
+            	<?php
+            	$user = User::find($wishlist->userid);
+            	?>
+                <tr>
+                    <td><?php echo $user->fullNameLink(); ?></td>
+            		<td><a href="<?php echo URL::to('wishlist/'.$wishlist->id); ?>"><?php echo e($wishlist->name); ?></a></td>
+					<td><?php echo e($wishlist->author); ?></td>
+					<td><?php echo e($wishlist->price); ?></td>
+
+                    <?php if(User::adminCheck(Auth::user()->id)): ?>
+                    <td><?php echo link_to_route('wishlist.edit', 'Edit', array($wishlist->id), array('class' => 'btn btn-info')); ?></td>
+                    <td>
+                        <?php echo Form::open(array('method' => 'DELETE', 'route' => array('wishlist.destroy', $wishlist->id))); ?>
+                            <?php echo Form::submit('Delete', array('class' => 'btn btn-danger')); ?>
+                        <?php echo Form::close(); ?>
+                    </td>
+                    <?php endif; ?>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php else: ?>
+    No Books found
+<?php endif; ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.bookcheetah', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
