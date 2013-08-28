@@ -64,7 +64,7 @@ Route::get('social/auth', 'UserController@auth');
 
 //Contact us via gmail
 Route::post('gmail', 'Oauth2Controller@email');
-
+Route::post('payment', 'Oauth2Controller@payment');
 // Route::get('user/{name}', function($name){
 // 	return "Try user/id ".$name;
 // })->where('name', '[A-Za-z]+');
@@ -76,6 +76,8 @@ Route::get('termsofuse', function(){ return View::make('termsofuse');});
 Route::get('customerservice', function(){ return View::make('customerservice');});
 Route::get('template', function(){return View::make('template');});
 Route::get('contactus', function(){ return View::make('contactus');});
+Route::get('donate', function(){ return View::make('donate');});
+
 
 
 Route::get('colleges/ajax','CollegesController@ajaxByLetters');

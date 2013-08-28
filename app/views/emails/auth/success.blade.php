@@ -1,9 +1,12 @@
 <html>
 <head>
 	<meta http-equiv="refresh" content="5; URL=thankyou.htm">
-	<title>Success</title>
+	<title></title>
 </head>
 <body>
-	Mail send was Success!
+<h1>Thank You</h1>
+<p>Your payment was successful. Thank you.</p>
 </body>
 </html>
+
+
